@@ -1,4 +1,3 @@
-# -smart-task-scheduler
 # smart-task-scheduler/README.md
 
 # 🧠 Smart Task Scheduler (AI-Enhanced To-Do App)

@@ -10,5 +10,10 @@ def predict():
     priority = predict_priority(task_text)
     return jsonify({"task": task_text, "predicted_priority": priority})
 
+# NEW: Health check or test route
+@app.route("/test", methods=["GET"])
+def test():
+    return jsonify({"message": "API is up and running!"})
+
 if __name__ == "__main__":
     app.run(debug=True)

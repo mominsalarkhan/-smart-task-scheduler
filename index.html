@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Task Scheduler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f9fafb;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Smart Task Scheduler</h1>
+  <p>Enter your task below and get its predicted priority:</p>
+  <input type="text" id="taskInput" placeholder="e.g. Submit report by tonight" size="40"/>
+  <button onclick="predictPriority()">Predict</button>
+
+  <div id="result"></div>
+
+  <script>
+    function predictPriority() {
+      const task = document.getElementById("taskInput").value;
+
+      fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ task })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("result").innerText =
+          `Predicted Priority: ${data.predicted_priority}`;
+      })
+      .catch(error => {
+        document.getElementById("result").innerText = "Error connecting to server.";
+        console.error("Error:", error);
+      });
+    }
+  </script>
+</body>
+</html>
